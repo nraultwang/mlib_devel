@@ -9,36 +9,40 @@ sim_type    = 4               # Scicos computational function type
 blocktype   = "c"             # c-block
 graphics    = { width = 4, height = 8, style = "shape=rectangle;fillColor=green" }
 
+# ------------------------------------------
 # parameter definitions: variable name, type, default, label, help text
+# ------------------------------------------
 [[block.parameters]]
 name        = "blkname"
-type        = "string"
+type        = "str"
 default     = "adder_AUTOGEN"
 label       = "Block Name"
 help        = "Any string to identify the block"
 
 [[block.parameters]]
 name        = "a_bitwidth"
-type        = "int"
+type        = "intvec"
 default     = 32
 label       = "Input bit width (a)"
 help        = "Width in bits for port a"
 
 [[block.parameters]]
 name        = "b_bitwidth"
-type        = "int"
+type        = "intvec"
 default     = 32
 label       = "Input bit width (b)"
 help        = "Width in bits for port b"
 
 [[block.parameters]]
 name        = "c_bitwidth"
-type        = "int"
+type        = "intvec"
 default     = 32
 label       = "Output bit width (c)"
 help        = "Width in bits for port c"
 
+# ------------------------------------------
 # input ports: name, default rows, default cols, implicit/explicit
+# ------------------------------------------
 [[block.inputs]]
 name        = "in0"
 rows        = 1
