@@ -5,6 +5,9 @@ from jinja2 import Template, FileSystemLoader, Environment
 from pathlib import Path
 import json
 
+AUTOGEN_CONFIG_DIR  = Path(".")
+AUTOGEN_OUT_DIR     = Path("../scilab_blocks/casper_dsp_autogen")
+
 # Load TOML
 def load_config(toml_path):
     with open(toml_path, "rb") as f:
@@ -29,12 +32,9 @@ def build_json(blk):
 
     return {"parameters": {"keys": keys, "values": values}}
 
-def generate_block(
-    config_path="slice_AUTOGEN.toml",
-    out_dir=Path("../scilab_blocks/casper_dsp_autogen")
-):
-    out_dir.mkdir(exist_ok=True)
 
+def generate_block(config_path, out_dir):
+    """automatically generate a pair of .sci and .json files from the given .toml config file"""
     # initialize the template object
     loader = FileSystemLoader('.')
     env = Environment(autoescape=False, loader=loader)
@@ -61,7 +61,18 @@ def generate_block(
     with open(json_fpath, 'w') as fp:
         json.dump(json_cfg, fp, indent=4)
     print(f"Wrote generated {blk['name']}.sci and {blk['name']}.json to '{out_dir}'")
+
+
+def generate_all_blocks(config_dir=AUTOGEN_CONFIG_DIR, out_dir=AUTOGEN_OUT_DIR):
+    assert AUTOGEN_CONFIG_DIR.exists(),f"the given config directory '{AUTOGEN_CONFIG_DIR} does not exist!"
+    assert AUTOGEN_OUT_DIR.exists(),f"the given out directory '{AUTOGEN_OUT_DIR} does not exist!"
+    
+    autogen_config_files = list(AUTOGEN_CONFIG_DIR.glob("*.toml"))
+    for f in autogen_config_files:
+        assert f.exists()
+        config_path = config_dir / f
+        generate_block(config_path, out_dir)
     
 
 if __name__ == "__main__":
-    generate_block()
+    generate_all_blocks()
