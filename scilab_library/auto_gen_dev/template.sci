@@ -29,7 +29,7 @@ function [x, y, typ] = {{ block.name }}(job, arg1, arg2)
       
       // cast and unpack the user parameters
       {% for p in block.parameters -%}
-      {% if p.type == "string" -%}
+      {% if p.type == "str" -%}
       {{ p.name }} = p.name;
       {% else -%}
       {{ p.name }} = evstr({{ p.name }});
@@ -51,7 +51,7 @@ function [x, y, typ] = {{ block.name }}(job, arg1, arg2)
     model.sim       = list('{{ block.name }}', {{ block.sim_type }});
     model.blocktype = '{{ block.blocktype }}';
     model.rpar      = [...
-      {% for p in block.parameters if p.type != "string" %}{{ p.default }}{% if not loop.last %}, {% endif %}{% endfor %}...
+      {% for p in block.parameters if p.type != "str" %}{{ p.default }}{% if not loop.last %}, {% endif %}{% endfor %}...
     ];
 
     // initialize ports

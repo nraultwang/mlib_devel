@@ -28,7 +28,7 @@ function [x, y, typ] = adder_AUTOGEN(job, arg1, arg2)
     if ok then
       
       // cast and unpack the user parameters
-      blkname = evstr(blkname);
+      blkname = p.name;
       a_bitwidth = evstr(a_bitwidth);
       b_bitwidth = evstr(b_bitwidth);
       c_bitwidth = evstr(c_bitwidth);
@@ -49,7 +49,7 @@ function [x, y, typ] = adder_AUTOGEN(job, arg1, arg2)
     model.sim       = list('adder_AUTOGEN', 4);
     model.blocktype = 'c';
     model.rpar      = [...
-      adder_AUTOGEN, 32, 32, 32...
+      32, 32, 32...
     ];
 
     // initialize ports
