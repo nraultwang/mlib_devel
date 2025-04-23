@@ -1,0 +1,79 @@
+// template.sci
+
+function [x, y, typ] = {{ block.name }}(job, arg1, arg2)
+  x = []; y = []; typ = [];
+
+  // Initialize parameters to their defaults
+  {% for p in block.parameters %}
+  {{ p.name }} = {{ p.default|repr }};
+  {% endfor %}
+
+  select job
+
+  case 'set' then
+    x        = arg1;
+    graphics = x.graphics;
+    exprs    = graphics.exprs;
+    model    = x.model;
+
+    // Build dialog labels & types
+    labels = [
+      {% for p in block.parameters %}'{{ p.label }}'{% if not loop.last %}, {% endif %}{% endfor %}
+    ];
+    types = list(
+      {% for p in block.parameters %}"{{ p.type }}", 1{% if not loop.last %}, {% endif %}{% endfor %}
+    );
+
+    [ok, {% for p in block.parameters %} {{ p.name }}{% if not loop.last %}, {% endif %}{% endfor %}, exprs] = ...
+      getvalue("Set {{ block.name }} parameters", labels, types, exprs);
+
+    if ok then
+      {% for p in block.parameters %}
+      {{ p.name }} = strtod({{ p.name }});  // convert string to number if needed
+      {% endfor %}
+
+      graphics.exprs = exprs;
+      [model, graphics, ok] = set_io(...
+        model, graphics,
+        list(
+          {% for ip in block.inputs %} {{ ip.rows }}, {{ ip.cols_param }}, "{{ ip.implicit|ternary('I','E') }}"{% if not loop.last %}, {% endif %}{% endfor %}
+        ),
+        list(
+          {% for op in block.outputs %} {{ op.rows }}, {{ op.cols_param }}, "{{ op.implicit|ternary('I','E') }}"{% if not loop.last %}, {% endif %}{% endfor %}
+        )
+      );
+
+      if ok then
+        x.graphics = graphics;
+        x.model    = model;
+      end
+    end
+
+  case 'define' then
+    model = scicos_model();
+    model.sim       = list('{{ block.name }}', {{ block.sim_type }});
+    model.blocktype = '{{ block.blocktype }}';
+    model.rpar      = [
+      {% for p in block.parameters if p.type != "string" %}{{ p.default }}{% if not loop.last %}, {% endif %}{% endfor %}
+    ];
+    model.in   = [ {% for ip in block.inputs  %}{{ ip.rows }}{% if not loop.last %}, {% endif %}{% endfor %} ];
+    model.in2  = [ {% for ip in block.inputs  %}{{ ip.cols_param }}{% if not loop.last %}, {% endif %}{% endfor %} ];
+    model.out  = [ {% for op in block.outputs %}{{ op.rows }}{% if not loop.last %}, {% endif %}{% endfor %} ];
+    model.out2 = [ {% for op in block.outputs %}{{ op.cols_param }}{% if not loop.last %}, {% endif %}{% endfor %} ];
+
+    exprs = [
+      {% for p in block.parameters %}'{{ p.default }}'{% if not loop.last %}; {% endif %}{% endfor %}
+    ];
+    gr_i = [];  // you can populate this if your blocks all share a default icon
+
+    x = standard_define(
+      [{{ block.graphics.width }} {{ block.graphics.height }}],
+      model, exprs, gr_i
+    );
+    x.graphics.in_implicit  = [{% for ip in block.inputs  %}'{{ ip.implicit|ternary("E","I") }}'{% if not loop.last %}, {% endif %}{% endfor %}];
+    x.graphics.out_implicit = [{% for op in block.outputs %}'{{ op.implicit|ternary("E","I") }}'{% if not loop.last %}, {% endif %}{% endfor %}];
+    x.graphics.style        = "{{ block.graphics.style }}";
+    x.model.label           = "{{ block.tag }}";
+
+  end
+endfunction

@@ -1,0 +1,49 @@
+# ========================
+# DSP Block Identification
+# ========================
+name = 'adder'            # Class name for Python DSPBlock
+tag = 'dsp:adder'         # Unique identifier for block recognition
+module = 'adder'          # Corresponding Verilog module name
+type = 'dsp'
+
+# =====================
+# HDL Configuration
+# =====================
+[blk]
+
+# =====================
+# HDL Library dependencies
+# =====================
+[[blk.libs]]
+hdl_library = 'dsp_blocks'  # Target HDL library for compilation
+
+# HDL source files
+[[blk.sources]]
+path = 'adder/*.v'        # All Verilog files in adder directory
+file_type = 'verilog'
+
+# =====================
+# Port Configuration
+# =====================
+[[blk.ports]]
+name = 'clk'              # Primary clock input
+dir = 'in'                # Input direction
+width = 1                 # Single-bit clock
+parent_port = true        # Connects to parent module's clock
+clock = true              # Mark as clock domain
+
+[[blk.ports]]
+name = 'in0'
+dir = 'in'
+width = 32
+
+
+[[blk.ports]]
+name = 'in1'
+dir = 'in'
+width = 32
+
+[[blk.ports]]
+name = 'out0'
+dir = 'out'
+width = 32

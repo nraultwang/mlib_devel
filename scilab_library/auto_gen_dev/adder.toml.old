@@ -1,0 +1,37 @@
+# Top-level module details
+name = 'adder'
+fullpath = ''
+tag = 'dsp:adder'
+
+# ----- Configure Python DSP Block -----
+[dsp_block]
+
+
+
+# Add paths to HDL sources
+[[dsp_block.sources]]
+path = 'adder/*'
+
+## Declare I/O ports
+[[dsp_block.ports]]
+name = 'clk'
+parent_port = false
+width = 32
+dir = 'in'
+
+[[dsp_block.ports]]
+name = 'in1'
+parent_port = false
+width = 32
+dir = 'in'
+
+[[dsp_block.ports]]
+name = 'out0'
+parent_port = false
+width = 32
+dir = 'out'
+
+
+# ----- Configure Scilab Block -----
+
+[scilab_
