@@ -35,13 +35,13 @@ function [x, y, typ] = adder_AUTOGEN(job, arg1, arg2)
 
     if ok then
       
-      blkname = strtod(blkname);  // convert string to number if needed
+      blkname = strtod(blkname);
       
-      a_bitwidth = strtod(a_bitwidth);  // convert string to number if needed
+      a_bitwidth = strtod(a_bitwidth);
       
-      b_bitwidth = strtod(b_bitwidth);  // convert string to number if needed
+      b_bitwidth = strtod(b_bitwidth);
       
-      c_bitwidth = strtod(c_bitwidth);  // convert string to number if needed
+      c_bitwidth = strtod(c_bitwidth);
       
 
       graphics.exprs = exprs;
@@ -82,10 +82,18 @@ function [x, y, typ] = adder_AUTOGEN(job, arg1, arg2)
       [4 8],...
       model, exprs, gr_i...
     );
-    x.graphics.in_implicit  = ['I', 'I'];
-    x.graphics.out_implicit = ['I'];
+
+    // Add input ports
+    x.graphics.in_label     = ['in0', 'in1'];
+    x.graphics.in_implicit  = ['E', 'E'];
+
+    // Add output ports
+    x.graphics.out_label    = [ 'out0'];
+    x.graphics.out_implicit = ['E'];
+
+    // Style module
     x.graphics.style        = "shape=rectangle;fillColor=green";
-    x.model.label           = "dsp:adder_AUTOGEN";
+    x.model.label           = "dsp";
 
   end
 endfunction

@@ -29,7 +29,7 @@ function [x, y, typ] = {{ block.name }}(job, arg1, arg2)
 
     if ok then
       {% for p in block.parameters %}
-      {{ p.name }} = strtod({{ p.name }});  // convert string to number if needed
+      {{ p.name }} = strtod({{ p.name }});
       {% endfor %}
 
       graphics.exprs = exprs;
@@ -70,10 +70,18 @@ function [x, y, typ] = {{ block.name }}(job, arg1, arg2)
       [{{ block.graphics.width }} {{ block.graphics.height }}],...
       model, exprs, gr_i...
     );
-    x.graphics.in_implicit  = [{% for ip in block.inputs  %}'{{ ip.implicit|ternary("E","I") }}'{% if not loop.last %}, {% endif %}{% endfor %}];
-    x.graphics.out_implicit = [{% for op in block.outputs %}'{{ op.implicit|ternary("E","I") }}'{% if not loop.last %}, {% endif %}{% endfor %}];
+
+    // Add input ports
+    x.graphics.in_label     = [{% for ip in block.inputs  %}{{ ip.name | repr}}{% if not loop.last %}, {% endif %}{% endfor %}];
+    x.graphics.in_implicit  = [{% for ip in block.inputs  %}'{{ ip.implicit|ternary("I","E") }}'{% if not loop.last %}, {% endif %}{% endfor %}];
+
+    // Add output ports
+    x.graphics.out_label    = [{% for op in block.outputs %} {{ op.name | repr}}{% if not loop.last %}, {% endif %}{% endfor %}];
+    x.graphics.out_implicit = [{% for op in block.outputs %}'{{ op.implicit|ternary("I","E") }}'{% if not loop.last %}, {% endif %}{% endfor %}];
+
+    // Style module
     x.graphics.style        = "{{ block.graphics.style }}";
-    x.model.label           = "{{ block.tag }}";
+    x.model.label           = "{{ block.label }}";
 
   end
 endfunction

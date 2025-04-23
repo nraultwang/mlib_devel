@@ -4,6 +4,7 @@
 name        = "adder_AUTOGEN"
 fullpath    = ""              
 tag         = "dsp:adder_AUTOGEN"
+label       = "dsp"
 sim_type    = 4               # Scicos computational function type
 blocktype   = "c"             # c-block
 graphics    = { width = 4, height = 8, style = "shape=rectangle;fillColor=green" }
