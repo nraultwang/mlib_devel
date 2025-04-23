@@ -28,7 +28,7 @@ def build_json(blk):
     return {"parameters": {"keys": keys, "values": values}}
 
 def generate_block(
-    config_path="blocks.toml",
+    config_path="adder_AUTOGEN.toml",
     out_dir=Path("../scilab_blocks/casper_dsp_autogen")
 ):
     out_dir.mkdir(exist_ok=True)
@@ -36,7 +36,7 @@ def generate_block(
     # initialize the template object
     loader = FileSystemLoader('.')
     env = Environment(autoescape=True, loader=loader)
-    env.filters['repr'] = repr
+    env.filters['str'] = str
     env.filters['ternary'] = ternary
     temp = env.get_template('template.sci')
     
