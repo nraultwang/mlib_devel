@@ -50,6 +50,8 @@ dsp_fig_dir = cur_dir + '/scilab_library/scilab_blocks/casper_dsp/figures/';
 pal = xcosPal("CASPER DSP [AUTOGEN]");
 pal = xcosPalAddBlock(pal, adder_AUTOGEN_inst);
 pal = xcosPalAddBlock(pal, slice_AUTOGEN_inst);
+xcosPalAdd(pal);
+debug_info('------ CASPER DSP [AUTOGEN] loaded --------');
 
 // create the blocks
 

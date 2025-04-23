@@ -81,11 +81,11 @@ function [x, y, typ] = slice_AUTOGEN(job, arg1, arg2)
       );
 
       // add input ports
-      x.graphics.in_label     = ['input'];
+      x.graphics.in_label     = ['in'];
       x.graphics.in_implicit  = ['E'];
 
       // add output ports
-      x.graphics.out_label    = [ 'output'];
+      x.graphics.out_label    = [ 'out'];
       x.graphics.out_implicit = ['E'];
 
       // style the module

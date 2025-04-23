@@ -51,14 +51,14 @@ help        = ""
 # input ports: name, default rows, default cols, implicit/explicit
 # ------------------------------------------
 [[block.inputs]]
-name        = "input"
+name        = "in"
 rows        = 1
 cols_param  = "input_width"
 implicit    = false
 
 # output ports
 [[block.outputs]]
-name        = "output"
+name        = "out"
 rows        = 1
 cols_param  = "output_width"
 implicit    = false
