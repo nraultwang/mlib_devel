@@ -1,0 +1,22 @@
+{
+    "parameters": {
+        "keys": [
+            "name",
+            "fullpath",
+            "tag",
+            "blkname",
+            "a_bitwidth",
+            "b_bitwidth",
+            "c_bitwidth"
+        ],
+        "values": [
+            "adder",
+            "",
+            "dsp:adder",
+            "adder",
+            32,
+            32,
+            32
+        ]
+    }
+}

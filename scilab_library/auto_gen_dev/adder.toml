@@ -1,49 +1,58 @@
-# ========================
-# DSP Block Identification
-# ========================
-name = 'adder'            # Class name for Python DSPBlock
-tag = 'dsp:adder'         # Unique identifier for block recognition
-module = 'adder'          # Corresponding Verilog module name
-type = 'dsp'
+# adder.toml
 
-# =====================
-# HDL Configuration
-# =====================
-[blk]
+[block]
+name        = "adder"
+fullpath    = ""              # e.g. "scilab_blocks/casper_dsp/adder.sci"
+tag         = "dsp:adder"
+sim_type    = 4               # Scicos computational function type
+blocktype   = "c"             # c-block
+graphics    = { width = 4, height = 8, style = "shape=rectangle;fillColor=green" }
 
-# =====================
-# HDL Library dependencies
-# =====================
-[[blk.libs]]
-hdl_library = 'dsp_blocks'  # Target HDL library for compilation
+# parameter definitions: variable name, type, default, label, help text
+[[block.parameters]]
+name        = "blkname"
+type        = "string"
+default     = "adder"
+label       = "Block Name"
+help        = "Any string to identify the block"
 
-# HDL source files
-[[blk.sources]]
-path = 'adder/*.v'        # All Verilog files in adder directory
-file_type = 'verilog'
+[[block.parameters]]
+name        = "a_bitwidth"
+type        = "int"
+default     = 32
+label       = "Input bit width (a)"
+help        = "Width in bits for port a"
 
-# =====================
-# Port Configuration
-# =====================
-[[blk.ports]]
-name = 'clk'              # Primary clock input
-dir = 'in'                # Input direction
-width = 1                 # Single-bit clock
-parent_port = true        # Connects to parent module's clock
-clock = true              # Mark as clock domain
+[[block.parameters]]
+name        = "b_bitwidth"
+type        = "int"
+default     = 32
+label       = "Input bit width (b)"
+help        = "Width in bits for port b"
 
-[[blk.ports]]
-name = 'in0'
-dir = 'in'
-width = 32
+[[block.parameters]]
+name        = "c_bitwidth"
+type        = "int"
+default     = 32
+label       = "Output bit width (c)"
+help        = "Width in bits for port c"
 
+# input ports: name, default rows, default cols, implicit/explicit
+[[block.inputs]]
+name        = "in0"
+rows        = 1
+cols_param  = "a_bitwidth"
+implicit    = false
 
-[[blk.ports]]
-name = 'in1'
-dir = 'in'
-width = 32
+[[block.inputs]]
+name        = "in1"
+rows        = 1
+cols_param  = "b_bitwidth"
+implicit    = false
 
-[[blk.ports]]
-name = 'out0'
-dir = 'out'
-width = 32
+# output ports
+[[block.outputs]]
+name        = "out0"
+rows        = 1
+cols_param  = "c_bitwidth"
+implicit    = false
