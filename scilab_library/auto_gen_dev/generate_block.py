@@ -35,8 +35,9 @@ def generate_block(
 
     # initialize the template object
     loader = FileSystemLoader('.')
-    env = Environment(autoescape=True, loader=loader)
+    env = Environment(autoescape=False, loader=loader)
     env.filters['str'] = str
+    env.filters['repr'] = repr
     env.filters['ternary'] = ternary
     temp = env.get_template('template.sci')
     

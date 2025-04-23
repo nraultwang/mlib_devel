@@ -7,11 +7,11 @@ function [x, y, typ] = adder_AUTOGEN(job, arg1, arg2)
   
   blkname = 'adder_AUTOGEN';
   
-  a_bitwidth = '32';
+  a_bitwidth = 32;
   
-  b_bitwidth = '32';
+  b_bitwidth = 32;
   
-  c_bitwidth = '32';
+  c_bitwidth = 32;
   
 
   select job
@@ -46,13 +46,13 @@ function [x, y, typ] = adder_AUTOGEN(job, arg1, arg2)
 
       graphics.exprs = exprs;
       [model, graphics, ok] = set_io(...
-        model, graphics,
+        model, graphics,...
         list(...
            1, a_bitwidth, "E",  1, b_bitwidth, "E"...
         ),...
         list(...
            1, c_bitwidth, "E"...
-        )
+        )...
       );
 
       if ok then
