@@ -1,6 +1,8 @@
 loadXcosLibs;
 
 // load the scilab functions
+getd('scilab_library/scilab_blocks/utils');
+/*
 exec('scilab_library/scilab_blocks/utils/debug_info.sci');
 exec('scilab_library/scilab_blocks/utils/collect_block_info.sci');
 exec('scilab_library/scilab_blocks/utils/get_block_tag.sci');
@@ -21,6 +23,7 @@ exec('scilab_library/scilab_blocks/jasper.sci');
 exec('scilab_library/scilab_blocks/jasper_frontend.sci');
 exec('scilab_library/scilab_blocks/jasper_simulation.sci');
 exec('scilab_library/scilab_blocks/run_simulation.sci');
+*/
 
 // TODO: load the xps and dsp blocks automatically
 // all of the blocks in the scilab_library/casper_xps and 
@@ -29,11 +32,14 @@ exec('scilab_library/scilab_blocks/run_simulation.sci');
 // add casper xps blocks
 debug_info('------Loading CASPER XPS...------');
 // load the xps blocks
+getd('scilab_library/scilab_blocks/casper_xps');
+/*
 exec('scilab_library/scilab_blocks/casper_xps/rfsoc4x2.sci');
 exec('scilab_library/scilab_blocks/casper_xps/gpio.sci');
 exec('scilab_library/scilab_blocks/casper_xps/swreg.sci');
 exec('scilab_library/scilab_blocks/casper_xps/rfdc.sci');
 exec('scilab_library/scilab_blocks/casper_xps/sbram.sci');
+*/
 // create the blocks
 rfsoc4x2_inst = rfsoc4x2("define");
 gpio_inst = gpio("define");
@@ -56,6 +62,8 @@ debug_info('------ CASPER XPS loaded --------');
 // add casper dsp blocks
 debug_info('------Loading CASPER DSP...------');
 // load the xps blocks
+getd('scilab_library/scilab_blocks/casper_dsp');
+/*
 exec('scilab_library/scilab_blocks/casper_dsp/adder.sci');
 exec('scilab_library/scilab_blocks/casper_dsp/edge_detect.sci');
 exec('scilab_library/scilab_blocks/casper_dsp/counter.sci');
@@ -65,8 +73,10 @@ exec('scilab_library/scilab_blocks/casper_dsp/munge.sci');
 exec('scilab_library/scilab_blocks/casper_dsp/wbfft.sci');
 exec('scilab_library/scilab_blocks/casper_dsp/bus_expand.sci');
 exec('scilab_library/scilab_blocks/casper_dsp/dsp_constant.sci');
+*/
 
 // create the blocks
+
 adder_inst = adder("define");
 edge_detect_inst = edge_detect("define");
 counter_inst = counter("define");
@@ -76,6 +86,7 @@ munge_inst = munge("define");
 wbfft_inst = wbfft("define");
 bus_expand_inst = bus_expand("define");
 dsp_constant_inst = dsp_constant("define");
+
 cur_dir = pwd();
 dsp_fig_dir = cur_dir + '/scilab_library/scilab_blocks/casper_dsp/figures/';
 pal = xcosPal("CASPER DSP");
