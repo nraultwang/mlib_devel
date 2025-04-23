@@ -30,13 +30,16 @@ function [x, y, typ] = adder_AUTOGEN(job, arg1, arg2)
 
       if ok then
         
+        /*
         // cast and unpack the user parameters
-        blkname = p.name;
+        blkname = blkname;
         a_bitwidth = evstr(a_bitwidth);
         b_bitwidth = evstr(b_bitwidth);
         c_bitwidth = evstr(c_bitwidth);
         
+        */
 
+        // update the block style
         graphics.exprs = exprs;
         graphics.style  = "shape=rectangle;fillColor=green";
 
@@ -45,16 +48,21 @@ function [x, y, typ] = adder_AUTOGEN(job, arg1, arg2)
         model.in2  = [ a_bitwidth, b_bitwidth ];
         model.out  = [ 1 ];
         model.out2 = [ c_bitwidth ];
-        
+
+        x.model = model;
+        x.graphics = graphics;
       end
 
     case 'define' then
       model = scicos_model();
       model.sim       = list('adder_AUTOGEN', 4);
       model.blocktype = 'c';
+      // model.rpar : I don't think we need to set this, but I'll leave it here for later in case we do.
+      /*
       model.rpar      = [...
         32, 32, 32...
       ];
+      */
 
       // initialize ports
       model.in   = [ 1, 1 ];

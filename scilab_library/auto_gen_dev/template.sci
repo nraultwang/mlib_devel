@@ -28,15 +28,18 @@ function [x, y, typ] = {{ block.name }}(job, arg1, arg2)
 
       if ok then
         
+        /*
         // cast and unpack the user parameters
         {% for p in block.parameters -%}
         {% if p.type == "str" -%}
-        {{ p.name }} = p.name;
+        {{ p.name }} = {{ p.name }};
         {% else -%}
         {{ p.name }} = evstr({{ p.name }});
         {% endif -%}
         {% endfor %}
+        */
 
+        // update the block style
         graphics.exprs = exprs;
         graphics.style  = "{{ block.graphics.style }}";
 
@@ -45,16 +48,21 @@ function [x, y, typ] = {{ block.name }}(job, arg1, arg2)
         model.in2  = [ {% for ip in block.inputs  %}{{ ip.cols_param }}{% if not loop.last %}, {% endif %}{% endfor %} ];
         model.out  = [ {% for op in block.outputs %}{{ op.rows }}{% if not loop.last %}, {% endif %}{% endfor %} ];
         model.out2 = [ {% for op in block.outputs %}{{ op.cols_param }}{% if not loop.last %}, {% endif %}{% endfor %} ];
-        
+
+        x.model = model;
+        x.graphics = graphics;
       end
 
     case 'define' then
       model = scicos_model();
       model.sim       = list('{{ block.name }}', {{ block.sim_type }});
       model.blocktype = '{{ block.blocktype }}';
+      // model.rpar : I don't think we need to set this, but I'll leave it here for later in case we do.
+      /*
       model.rpar      = [...
         {% for p in block.parameters if p.type != "str" %}{{ p.default }}{% if not loop.last %}, {% endif %}{% endfor %}...
       ];
+      */
 
       // initialize ports
       model.in   = [ {% for ip in block.inputs  %}{{ ip.rows }}{% if not loop.last %}, {% endif %}{% endfor %} ];
