@@ -1,9 +1,9 @@
-# adder.toml
+# adder_AUTOGEN.toml
 
 [block]
-name        = "adder"
-fullpath    = ""              # e.g. "scilab_blocks/casper_dsp/adder.sci"
-tag         = "dsp:adder"
+name        = "adder_AUTOGEN"
+fullpath    = ""              
+tag         = "dsp:adder_AUTOGEN"
 sim_type    = 4               # Scicos computational function type
 blocktype   = "c"             # c-block
 graphics    = { width = 4, height = 8, style = "shape=rectangle;fillColor=green" }
@@ -12,7 +12,7 @@ graphics    = { width = 4, height = 8, style = "shape=rectangle;fillColor=green"
 [[block.parameters]]
 name        = "blkname"
 type        = "string"
-default     = "adder"
+default     = "adder_AUTOGEN"
 label       = "Block Name"
 help        = "Any string to identify the block"
 

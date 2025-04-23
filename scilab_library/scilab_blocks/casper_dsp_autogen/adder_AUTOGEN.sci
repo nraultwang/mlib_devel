@@ -1,11 +1,11 @@
 // template.sci
 
-function [x, y, typ] = adder(job, arg1, arg2)
+function [x, y, typ] = adder_AUTOGEN(job, arg1, arg2)
   x = []; y = []; typ = [];
 
   // Initialize parameters to their defaults
   
-  blkname = &#39;adder&#39;;
+  blkname = &#39;adder_AUTOGEN&#39;;
   
   a_bitwidth = 32;
   
@@ -31,7 +31,7 @@ function [x, y, typ] = adder(job, arg1, arg2)
     );
 
     [ok,  blkname,  a_bitwidth,  b_bitwidth,  c_bitwidth, exprs] = ...
-      getvalue("Set adder parameters", labels, types, exprs);
+      getvalue("Set adder_AUTOGEN parameters", labels, types, exprs);
 
     if ok then
       
@@ -63,7 +63,7 @@ function [x, y, typ] = adder(job, arg1, arg2)
 
   case 'define' then
     model = scicos_model();
-    model.sim       = list('adder', 4);
+    model.sim       = list('adder_AUTOGEN', 4);
     model.blocktype = 'c';
     model.rpar      = [
       32, 32, 32
@@ -74,7 +74,7 @@ function [x, y, typ] = adder(job, arg1, arg2)
     model.out2 = [ c_bitwidth ];
 
     exprs = [
-      'adder'; '32'; '32'; '32'
+      'adder_AUTOGEN'; '32'; '32'; '32'
     ];
     gr_i = [];  // you can populate this if your blocks all share a default icon
 
@@ -85,7 +85,7 @@ function [x, y, typ] = adder(job, arg1, arg2)
     x.graphics.in_implicit  = ['I', 'I'];
     x.graphics.out_implicit = ['I'];
     x.graphics.style        = "shape=rectangle;fillColor=green";
-    x.model.label           = "dsp:adder";
+    x.model.label           = "dsp:adder_AUTOGEN";
 
   end
 endfunction

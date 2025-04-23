@@ -52,9 +52,9 @@ def generate_block(
     json_cfg = build_json(blk)
     
     # write rendered template and JSON to file.
-    sci_fpath = out_dir / f"{blk['name']}_AUTOGEN.sci"
+    sci_fpath = out_dir / f"{blk['name']}.sci"
     sci_fpath.write_text(sci_code)
-    json_fpath = out_dir / f"{blk['name']}_AUTOGEN.json"
+    json_fpath = out_dir / f"{blk['name']}.json"
     with open(json_fpath, 'w') as fp:
         json.dump(json_cfg, fp, indent=4)
     print(f"Wrote generated .sci and .json files to '{out_dir}'")

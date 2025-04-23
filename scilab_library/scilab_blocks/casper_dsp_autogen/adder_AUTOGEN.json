@@ -10,10 +10,10 @@
             "c_bitwidth"
         ],
         "values": [
-            "adder",
+            "adder_AUTOGEN",
             "",
-            "dsp:adder",
-            "adder",
+            "dsp:adder_AUTOGEN",
+            "adder_AUTOGEN",
             32,
             32,
             32
