@@ -1,0 +1,22 @@
+{
+    "parameters": {
+        "keys": [
+            "name",
+            "fullpath",
+            "tag",
+            "blkname",
+            "input_width",
+            "output_width",
+            "slice_start"
+        ],
+        "values": [
+            "slice_AUTOGEN",
+            "",
+            "dsp:slice_AUTOGEN",
+            "slice_AUTOGEN",
+            32,
+            1,
+            0
+        ]
+    }
+}

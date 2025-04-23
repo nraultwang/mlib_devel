@@ -30,7 +30,7 @@ def build_json(blk):
     return {"parameters": {"keys": keys, "values": values}}
 
 def generate_block(
-    config_path="adder_AUTOGEN.toml",
+    config_path="slice_AUTOGEN.toml",
     out_dir=Path("../scilab_blocks/casper_dsp_autogen")
 ):
     out_dir.mkdir(exist_ok=True)
@@ -60,7 +60,7 @@ def generate_block(
     json_fpath = out_dir / f"{blk['name']}.json"
     with open(json_fpath, 'w') as fp:
         json.dump(json_cfg, fp, indent=4)
-    print(f"Wrote generated .sci and .json files to '{out_dir}'")
+    print(f"Wrote generated {blk['name']}.sci and {blk['name']}.json to '{out_dir}'")
     
 
 if __name__ == "__main__":

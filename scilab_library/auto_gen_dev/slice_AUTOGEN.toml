@@ -1,0 +1,64 @@
+# slice_AUTOGEN.toml
+
+[block]
+name        = "slice_AUTOGEN"
+fullpath    = ""              
+tag         = "dsp:slice_AUTOGEN"
+label       = "dsp"
+sim_type    = 4               # Scicos computational function type
+blocktype   = "c"             # c-block
+
+# ------------------------------------------
+# block graphic style
+# ------------------------------------------
+[block.graphics]
+width = 4
+height = 8
+style = "shape=rectangle;fillColor=green" 
+
+# ------------------------------------------
+# parameter definitions: variable name, type, default, label, help text
+# ------------------------------------------
+[[block.parameters]]
+name        = "blkname"
+type        = "str"
+default     = "slice_AUTOGEN"
+label       = "Block Name"
+help        = "Any string to identify the block"
+
+[[block.parameters]]
+name        = "input_width"
+type        = "intvec"
+default     = 32
+label       = "Input bit width"
+help        = "Width in bits for data port"
+
+[[block.parameters]]
+name        = "output_width"
+type        = "intvec"
+default     = 1
+label       = "Output bit width"
+help        = "Width in bits for output port"
+
+[[block.parameters]]
+name        = "slice_start"
+type        = "intvec"
+default     = 0
+label       = "Starting index of slice"
+help        = ""
+
+# ------------------------------------------
+# input ports: name, default rows, default cols, implicit/explicit
+# ------------------------------------------
+[[block.inputs]]
+name        = "input"
+rows        = 1
+cols_param  = "input_width"
+implicit    = false
+
+# output ports
+[[block.outputs]]
+name        = "output"
+rows        = 1
+cols_param  = "output_width"
+implicit    = false
