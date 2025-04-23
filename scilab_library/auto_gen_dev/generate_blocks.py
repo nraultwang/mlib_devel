@@ -19,7 +19,7 @@ def ternary(cond, true_expr, false_expr):
 
 
 
-def main():
+def generate_blocks(out_dir = Path("generated_blocks")):
     loader = FileSystemLoader('.')
     env = Environment(autoescape=True, loader=loader)
     env.filters['repr'] = repr
@@ -29,12 +29,13 @@ def main():
 
     cfg = load_config("blocks.toml")
     template_str = Path("template.sci").read_text()
-    out_dir = Path("generated_blocks")
+    
     out_dir.mkdir(exist_ok=True)
     for blk in cfg.get("block", []):
         sci_code = temp.render(block=blk) #render_block(blk, template_str)
-        (out_dir / f"{blk['name']}.sci").write_text(sci_code)
-        print(f"Wrote {blk['name']}.sci")
+        fname = f"{blk['name']}_AUTOGEN.sci"
+        (out_dir / fname).write_text(sci_code)
+        print(f"Wrote generated .sci file to '{out_dir / fname}'")
 
 if __name__ == "__main__":
-    main()
+    generate_blocks()
